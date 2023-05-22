@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.cibertec.model.Libro;
 import com.cibertec.model.LibroTema;
@@ -36,6 +37,11 @@ public class LibroController {
 	public String registrarLibro (Model m) {
 		m.addAttribute("tema", temaRepo.findAll());
 		m.addAttribute("libro", new Libro());
+		return "registrarLibro";
+	}
+	
+	@PostMapping
+	public String registrarLibro (Model m) {
 		return "registrarLibro";
 	}
 }
