@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+	<title>CL2 - GerardoRodriguez</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+	<h1 class="m-2">Registro de Libros</h1>
+
+	<!-- SI HAY ALGUN ERROR SE MUESTRA ESTE MENSAJE -->
+	<div th:if="${mensaje}" class="alert alert-success">
+		<p class="m-0" th:text="${mensaje}"></p>
+	</div>
+
+	<form class="ms-4 me-4" th:action="@{/registrarLibro}" th:object="${libro}" method="post">
+		<div class="form-group mb-2">
+			<label for="titulo">Titulo</label>
+			<input th:field="*{titulo}" type="text" class="form-control" id="titulo"
+				placeholder="Introduce el titulo del libro" required>
+		</div>
+		<div class="form-group mb-2">
+			<label for="precio">Precio</label>
+			<input th:field="*{precio}" type="number" class="form-control" id="precio"
+				placeholder="Introduce el precio del libro" required>
+		</div>
+		<div class="form-group mb-2">
+			<label for="cant_ejemplares">Cantidad de Ejemplares</label>
+			<input th:field="*{cant_ejemplares}" type="number" class="form-control" id="cant_ejemplares"
+				placeholder="Introduce la cantidad de ejemplares" required>
+		</div>
+		<div class="form-group mb-2">
+			<label for="origen">Origen</label>
+			<input th:field="*{origen}" type="text" class="form-control" id="origen"
+				placeholder="Introduce el origen del libro" required>
+		</div>
+		<div class="form-group mb-2">
+			<label for="idtema">Tema</label>
+			<select th:field="*{idtema}" class="form-control" id="idtema" required>
+				<option value="-1">Selecciona una opción</option>
+				<option th:each="t : ${tema}" th:value="${t.idtema}" th:text="${t.nombre}">Computadoras</option>
+			</select>
+		</div>
+		<button type="submit" class="btn btn-primary">Registrar Libro</button>
+	</form>
+	
+	<div class="btn-toolbar mt-4 d-flex align-items-center justify-content-center" role="toolbar" aria-label="Botonera">
+		<div class="btn-group mr-2" role="group" aria-label="Botón Volver">
+			<button type="button" class="btn btn-secondary" onclick="window.location.href='/'">Listado</button>
+		</div>
+	</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+	crossorigin="anonymous"></script>
+
+</html>
