@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.cibertec.model.Libro;
 import com.cibertec.model.LibroTema;
+import com.cibertec.repository.ILibroRepository;
 import com.cibertec.repository.ILibroTemaRepository;
 import com.cibertec.repository.ITemaRepository;
 
@@ -18,6 +20,9 @@ import jakarta.transaction.Transactional;
 @Controller
 public class LibroController {
 
+	@Autowired
+	private ILibroRepository repo;
+	
 	@Autowired
 	private ITemaRepository temaRepo;
 	
@@ -40,8 +45,15 @@ public class LibroController {
 		return "registrarLibro";
 	}
 	
-	@PostMapping
-	public String registrarLibro (Model m) {
+	@PostMapping("/registrarLibro")
+	public String registrarLibroPost(@ModelAttribute Libro libro, Model m) {
+		try {
+			repo.save(libro);
+			m.addAttribute("mensaje", "Se registró el libro correctamente.");
+		} catch (Exception e) {
+			m.addAttribute("mensaje", "Hubo un error en el registro.");
+			e.printStackTrace();
+		}
 		return "registrarLibro";
 	}
 }

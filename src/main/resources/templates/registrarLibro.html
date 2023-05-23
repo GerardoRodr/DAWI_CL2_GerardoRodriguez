@@ -12,7 +12,7 @@
 <body>
 	<h1 class="m-2">Registro de Libros</h1>
 
-	<!-- SI HAY ALGUN ERROR SE MUESTRA ESTE MENSAJE -->
+	<!-- SE MUESTRA UN MENSAJE -->
 	<div th:if="${mensaje}" class="alert alert-success">
 		<p class="m-0" th:text="${mensaje}"></p>
 	</div>
@@ -21,28 +21,32 @@
 		<div class="form-group mb-2">
 			<label for="titulo">Titulo</label>
 			<input th:field="*{titulo}" type="text" class="form-control" id="titulo"
-				placeholder="Introduce el titulo del libro" required>
+				placeholder="Introduce el titulo del libro" required
+				maxlength="45">
 		</div>
 		<div class="form-group mb-2">
 			<label for="precio">Precio</label>
 			<input th:field="*{precio}" type="number" class="form-control" id="precio"
-				placeholder="Introduce el precio del libro" required>
+				placeholder="Introduce el precio del libro" required
+				step="0.01">
 		</div>
 		<div class="form-group mb-2">
 			<label for="cant_ejemplares">Cantidad de Ejemplares</label>
 			<input th:field="*{cant_ejemplares}" type="number" class="form-control" id="cant_ejemplares"
-				placeholder="Introduce la cantidad de ejemplares" required>
+				placeholder="Introduce la cantidad de ejemplares" required
+				pattern="^\d+$">
 		</div>
 		<div class="form-group mb-2">
 			<label for="origen">Origen</label>
 			<input th:field="*{origen}" type="text" class="form-control" id="origen"
-				placeholder="Introduce el origen del libro" required>
+				placeholder="Introduce el origen del libro" required
+				maxlength="45">
 		</div>
 		<div class="form-group mb-2">
 			<label for="idtema">Tema</label>
-			<select th:field="*{idtema}" class="form-control" id="idtema" required>
+			<select th:field="*{idtema}" class="form-control form-select" id="idtema" required>
 				<option value="-1">Selecciona una opción</option>
-				<option th:each="t : ${tema}" th:value="${t.idtema}" th:text="${t.nombre}">Computadoras</option>
+				<option th:each="t : ${tema}" th:value="${t.idtema}" th:text="${t.nombre}"></option>
 			</select>
 		</div>
 		<button type="submit" class="btn btn-primary">Registrar Libro</button>
